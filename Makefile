@@ -1,5 +1,5 @@
 TARGET = prog.out
-LIBS = -lSDL2main -lSDL2 -lm
+LIBS = -lSDL2main -lSDL2
 CC = g++
 CFLAGS = -fPIC -Wall -Werror -Wextra -Wno-unused-result -Wno-unused-parameter -Wno-unused-variable -O2
 
