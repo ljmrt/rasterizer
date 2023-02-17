@@ -15,7 +15,8 @@ int main()
     point_2d to_point_1(60, 240);
     draw_line(renderer, from_point_0, to_point_0);
     draw_line(renderer, from_point_1, to_point_1);
-
+    SDL_RenderPresent(renderer);
+    
     // keep the window open
     SDL_Event poll_event;
     while (1 < 2) {

@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cstdlib>
 #include <SDL2/SDL.h>
 #include "line_renderer.h"
@@ -6,7 +7,7 @@
 
 void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1)  // TODO: refactor and implement bresenham's algorithm
 {
-    SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     int x0 = point_0.get_x();
     int y0 = point_0.get_y();
@@ -21,7 +22,10 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1)  // T
 
         std::vector<int> ys = interpolate(x0, y0, x1, y1);
         for (auto x = x0; x < x1; x++) {
-            SDL_RenderDrawPoint(renderer, x, ys.at(x - x0));
+            // translate coordinates to proper system
+            int translated_x = (480/2) + x;
+            int translated_y = (480/2) - ys.at(x - x0);
+            SDL_RenderDrawPoint(renderer, translated_x, translated_y);
         }
     } else {  // line is more vertical
         // ensure y0 < y1
@@ -31,7 +35,10 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1)  // T
 
         std::vector<int> xs = interpolate(x0, y0, x1, y1);
         for (auto y = y0; y < y1; y++) {
-            SDL_RenderDrawPoint(renderer, y, xs.at(y - y0));
+            // translate coordinates to proper system
+            int translated_x = (480/2) + y;
+            int translated_y = (480/2) - xs.at(y - y0);
+            SDL_RenderDrawPoint(renderer, translated_x, translated_y);
         }
     }
 }

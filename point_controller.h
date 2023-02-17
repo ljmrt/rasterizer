@@ -9,7 +9,6 @@ class point_2d
     public:
         point_2d(int source_x, int source_y);  // constructor
         // TODO point_2d(const point_2d& source_point);  // copy constructor
-        ~point_2d();  // destructor
         // accessor functions
         int get_x();
         int get_y();
@@ -25,7 +24,6 @@ class line_2d
     public:
         line_2d(point_2d source_0, point_2d source_1);  // constructor
         line_2d(const line_2d& source_line);  // copy constructor
-        ~line_2d();  // destructor
 
         // accessor functions
         point_2d get_id_point(int id);  // get point with id

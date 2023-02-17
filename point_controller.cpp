@@ -2,11 +2,8 @@
 #include "point_controller.h"
 
 point_2d::point_2d(int source_x, int source_y) {
-    std::cout << "point_2d created" << std::endl;
-}
-
-point_2d::~point_2d() {
-    std::cout << "point_2d destroyed" << std::endl;
+    x = source_x;
+    y = source_y;
 }
 
 int point_2d::get_x() {
