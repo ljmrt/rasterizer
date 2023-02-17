@@ -8,8 +8,8 @@ std::vector<int> interpolate(int i0, float d0, int i1, float d1)
     }
 
     std::vector<int> values;
-    const int a = (d1 - d0) / (i1 - i0);  // calculate a(essentially slope)
-    int d = d0;
+    const float a = (d1 - d0) / (i1 - i0);  // calculate a(essentially slope)
+    float d = d0;
     for (int i = i0; i < i1; i++) {
         values.push_back(d);
         d += a;

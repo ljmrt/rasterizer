@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cstdlib>
+#include <iostream>
 #include <SDL2/SDL.h>
 #include "line_renderer.h"
 #include "point_controller.h"
@@ -33,7 +33,7 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1)  // T
             std::swap(y0, y1);
         }
 
-        std::vector<int> xs = interpolate(x0, y0, x1, y1);
+        std::vector<int> xs = interpolate(y0, x0, y1, x1);
         for (auto y = y0; y < y1; y++) {
             // translate coordinates to proper system
             int translated_x = (480/2) + y;
