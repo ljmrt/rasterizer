@@ -42,3 +42,10 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1)  // T
         }
     }
 }
+
+void draw_wireframe_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2)
+{
+    draw_line(renderer, point_0, point_1);
+    draw_line(renderer, point_1, point_2);
+    draw_line(renderer, point_2, point_0);
+}
