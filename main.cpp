@@ -10,7 +10,7 @@ int main()
     initialize_window("rasterizer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 480, 480, window, renderer);
 
     point_2d point_0(-200, -100);
-    point_2d point_1(0, 0);
+    point_2d point_1(200, 100);
     point_2d point_2(200, -100);
     draw_wireframe_triangle(renderer, point_0, point_1, point_2);
     SDL_RenderPresent(renderer);
