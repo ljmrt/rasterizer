@@ -11,11 +11,18 @@
 // @param point_1 point to draw to
 void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1);  // TODO: add color option
 
-// draw a triangle using the given points
+// draw a (black) wireframe triangle using the given points
 //
 // @param point_0 point to start/finish at
 // @param point_1 point to draw to from point_0
 // @param point_2 point to draw to from point_1, draws to point_0
 void draw_wireframe_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2);
+
+// draw a filled triangle using the given points
+//
+// @param point_0 point to start/finish at
+// @param point_1 point to draw to from point_0
+// @param point_2 point to draw to from point_1, draws to point_0
+void draw_filled_triangle(SDL_renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2);
 
 #endif  // LINE_RENDERER_H

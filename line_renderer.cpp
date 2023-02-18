@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <cmath>
 #include <SDL2/SDL.h>
 #include "line_renderer.h"
 #include "point_controller.h"
@@ -49,4 +50,51 @@ void draw_wireframe_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d 
     draw_line(renderer, point_0, point_1);
     draw_line(renderer, point_1, point_2);
     draw_line(renderer, point_2, point_0);
+}
+
+void draw_filled_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2)
+{
+    // ensure y0 <= y1 <= y2
+    if (point_1.get_y() < point_0.get_y()) {
+        std::swap(point_1, point_0);
+    }
+    if (point_2.get_y() < point_0.get_y()) {
+        std::swap(point_2, point_0);
+    }
+    if (point_2.get_y() < point_1.get_y()) {
+        std::swap(point_2, point_1);
+    }
+    // proper value fetch
+    int x0 = point_0.get_x();
+    int y0 = point_0.get_y();
+    int x1 = point_1.get_x();
+    int y1 = point_1.get_y();
+    int x2 = point_2.get_x();
+    int y2 = point_2.get_y();
+
+    // x values between two points
+    std::vector<int> x_01 = interpolate(y0, x0, y1, x1);
+    std::vector<int> x_12 = interpolate(y1, x1, y2, x2);
+    std::vector<int> x_02 = interpolate(y0, x0, y2, x2);
+
+    // concatenate x_01 and x_12(short sides)
+    x_01.pop_back();
+    x_01.insert(x_01.end(), x_12.begin(), x_12.end());
+
+    int m = floor(x_01.size() / 2);  // middle horizontal line
+    std::vector<int> x_left;  // left of horizontal line
+    std::vector<int> x_right;  // right of horizontal line
+    if (x_02.at(m) < x_01.at(m)) {
+        x_left = x_02;
+        x_right = x_01;
+    } else {
+        x_left = x_01;
+        x_right = x_02;
+    }
+
+    for (int y = y0; y < y2; y++) {
+        for (x = x_left.at(y - y0); x < x_right.at(y - y0); x++) {
+            // canvas pixel placement
+        }
+    }
 }
