@@ -23,6 +23,6 @@ void draw_wireframe_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d 
 // @param point_0 point to start/finish at
 // @param point_1 point to draw to from point_0
 // @param point_2 point to draw to from point_1, draws to point_0
-void draw_filled_triangle(SDL_renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2);
+void draw_filled_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2);
 
 #endif  // LINE_RENDERER_H

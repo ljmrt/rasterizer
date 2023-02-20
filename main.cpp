@@ -13,6 +13,7 @@ int main()
     point_2d point_1(200, 100);
     point_2d point_2(200, -100);
     draw_wireframe_triangle(renderer, point_0, point_1, point_2);
+    draw_filled_triangle(renderer, point_0, point_1, point_2);
     SDL_RenderPresent(renderer);
     
     // keep the window open

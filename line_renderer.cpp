@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 #include <cmath>
 #include <SDL2/SDL.h>
 #include "line_renderer.h"
@@ -91,10 +92,12 @@ void draw_filled_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d poi
         x_left = x_01;
         x_right = x_02;
     }
-
+ 
     for (int y = y0; y < y2; y++) {
-        for (x = x_left.at(y - y0); x < x_right.at(y - y0); x++) {
-            // canvas pixel placement
+        for (int x = x_left.at(y - y0); x < x_right.at(y - y0); x++) {
+            int translated_x = (480/2) + x;
+            int translated_y = (480/2) - y;
+            SDL_RenderDrawPoint(renderer, translated_x, translated_y);  // TODO: implement wrapper function for translation
         }
     }
 }
