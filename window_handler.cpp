@@ -27,7 +27,7 @@ int initialize_window(std::string window_name, int window_x, int window_y, int w
     }
 
     // fill window with white
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
     return 0;

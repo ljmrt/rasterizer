@@ -24,11 +24,8 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_c
 
         std::vector<int> ys = interpolate(x0, y0, x1, y1);
         for (auto x = x0; x < x1; x++) {
-            // translate coordinates to proper system
             int ys_value = x - x0 < ys.size() ? ys.at(x - x0) : 0;
-            int translated_x = (480/2) + x;
-            int translated_y = (480/2) - ys_value;
-            SDL_RenderDrawPoint(renderer, translated_x, translated_y);
+            canvas_draw_pixel(renderer, x, ys_value);
         }
     } else {  // line is more vertical
         // ensure y0 < y1
@@ -38,11 +35,8 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_c
 
         std::vector<int> xs = interpolate(y0, x0, y1, x1);
         for (auto y = y0; y < y1; y++) {
-            // translate coordinates to proper system
             int xs_value = y - y0 < xs.size() ? xs.at(y - y0) : 0;
-            int translated_x = (480/2) + xs_value;
-            int translated_y = (480/2) - y;
-            SDL_RenderDrawPoint(renderer, translated_x, translated_y);
+            canvas_draw_pixel(renderer, xs_value, y);
         }
     }
 }
@@ -97,9 +91,7 @@ void draw_filled_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d poi
  
     for (int y = y0; y < y2; y++) {
         for (int x = x_left.at(y - y0); x < x_right.at(y - y0); x++) {
-            int translated_x = (480/2) + x;
-            int translated_y = (480/2) - y;
-            SDL_RenderDrawPoint(renderer, translated_x, translated_y);  // TODO: implement wrapper function for translation
+            canvas_draw_pixel(renderer, x, y);
         }
     }
 }
