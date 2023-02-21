@@ -5,10 +5,11 @@
 #include "line_renderer.h"
 #include "point_controller.h"
 #include "common.h"
+#include "color_helper.h"
 
-void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1)  // TODO: refactor and implement bresenham's algorithm
+void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_color color)  // TODO: refactor and implement bresenham's algorithm
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, color.get_r(), color.get_g(), color.get_b(), 255);
 
     int x0 = point_0.get_x();
     int y0 = point_0.get_y();
@@ -46,15 +47,16 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1)  // T
     }
 }
 
-void draw_wireframe_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2)
+void draw_wireframe_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2, rgb_color color)
 {
-    draw_line(renderer, point_0, point_1);
-    draw_line(renderer, point_1, point_2);
-    draw_line(renderer, point_2, point_0);
+    draw_line(renderer, point_0, point_1, color);
+    draw_line(renderer, point_1, point_2, color);
+    draw_line(renderer, point_2, point_0, color);
 }
 
-void draw_filled_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2)
+void draw_filled_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2, rgb_color color)
 {
+    SDL_SetRenderDrawColor(renderer, color.get_r(), color.get_g(), color.get_b(), 255);
     // ensure y0 <= y1 <= y2
     if (point_1.get_y() < point_0.get_y()) {
         std::swap(point_1, point_0);
