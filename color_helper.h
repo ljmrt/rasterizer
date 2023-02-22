@@ -19,4 +19,10 @@ class rgb_color
     
 };
 
+// multiply a color by a constant
+//
+// @param source_color color to multiply
+// @param constant constant to multiply by
+rgb_color multiply_color(rgb_color source_color, float constant);
+
 #endif  // COLOR_HELPER_H

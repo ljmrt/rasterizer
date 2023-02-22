@@ -1,4 +1,3 @@
-#include <iostream>
 #include "point_controller.h"
 
 point_2d::point_2d(int source_x, int source_y) {

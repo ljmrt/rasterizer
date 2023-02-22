@@ -27,6 +27,9 @@ void draw_wireframe_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d 
 // @param point_1 point to draw to from point_0
 // @param point_2 point to draw to from point_1, draws to point_0
 // @param color color to use when filling
-void draw_filled_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2, rgb_color color);
+// @param h0 intensity of point_0
+// @param h1 intensity of point_1
+// @param h2 intensity of point_2
+void draw_filled_triangle(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, point_2d point_2, rgb_color color, float h0, float h1, float h2);
 
 #endif  // LINE_RENDERER_H

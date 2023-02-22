@@ -36,3 +36,10 @@ void rgb_color::set_b(float source_b)
 {
     b = source_b;
 }
+
+rgb_color multiply_color(rgb_color source_color, float constant)
+{
+    return rgb_color((source_color.get_r() * constant),
+                     (source_color.get_g() * constant),
+                     (source_color.get_b() * constant));
+}

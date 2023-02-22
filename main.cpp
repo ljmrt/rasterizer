@@ -13,8 +13,8 @@ int main()
     point_2d point_0(-200, -100);
     point_2d point_1(200, 100);
     point_2d point_2(200, -100);
+    draw_filled_triangle(renderer, point_0, point_1, point_2, rgb_color(186, 181, 161), 0, 1, 0);
     draw_wireframe_triangle(renderer, point_0, point_1, point_2, rgb_color(0, 0, 0));
-    draw_filled_triangle(renderer, point_0, point_1, point_2, rgb_color(186, 181, 161));
     SDL_RenderPresent(renderer);
     
     // keep the window open
