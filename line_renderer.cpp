@@ -14,6 +14,7 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_c
     int y0 = point_0.get_y();
     int x1 = point_1.get_x();
     int y1 = point_1.get_y();
+
     // if the change in x is bigger than the change in y(line is more horizontal)
     if (abs(x1 - x0) > abs(y1 - y0)) {
         // ensure x0 < x1

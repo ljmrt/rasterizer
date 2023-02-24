@@ -5,7 +5,7 @@
 // @param x x position to translate
 // @param y y position to translate
 // @return translated coordinates
-point_2d viewport_to_canvas(int x, int y);
+point_2d viewport_to_canvas(float x, float y);
 
 // get the projection of a vertex(point_3d)
 //

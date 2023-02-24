@@ -1,7 +1,7 @@
 #include "projection_handler.h"
 #include "point_controller.h"
 
-point_2d viewport_to_canvas(int x, int y)
+point_2d viewport_to_canvas(float x, float y)
 {
     // TODO: implement global canvas/window and viewport size
     return point_2d(x * (480/1), y*(480/1));

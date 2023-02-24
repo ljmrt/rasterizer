@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 #include <SDL2/SDL.h>
 #include "common.h"
 
@@ -22,7 +23,7 @@ std::vector<float> interpolate(int i0, float d0, int i1, float d1)
 int canvas_draw_pixel(SDL_Renderer *renderer, int x, int y)
 {
     // TODO: implement common variables(screen dimensions, background color, etc.)
-    int translated_x = (480/2) + x;
-    int translated_y = (480/2) - y;
+    int translated_x = (480/2) + x/3;
+    int translated_y = (480/2) - y/3;
     return SDL_RenderDrawPoint(renderer, translated_x, translated_y);
 }

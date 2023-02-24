@@ -35,18 +35,18 @@ class line_2d
 class point_3d
 {
     private:
-        int x;
-        int y;
-        int z;
+        float x;
+        float y;
+        float z;
     public:
-        point_3d(int source_x, int source_y, int source_z);  // constructor
+        point_3d(float source_x, float source_y, float source_z);  // constructor
         // accessor functions
-        int get_x();
-        int get_y();
-        int get_z();
-        void set_x(int source_x);
-        void set_y(int source_y);
-        void set_z(int source_z);
+        float get_x();
+        float get_y();
+        float get_z();
+        void set_x(float source_x);
+        void set_y(float source_y);
+        void set_z(float source_z);
 };
 
 #endif  // POINT_CONTROLLER_H

@@ -12,31 +12,39 @@ int main()
     initialize_window("rasterizer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 480, 480, window, renderer);
 
     // four "front" vertices of the cube
-    point_3d vertex_fa(-1, 1, 1);
-    point_3d vertex_fb(1, 1, 1);
-    point_3d vertex_fc(1, -1, 1);
-    point_3d vertex_fd(-1, -1, 1);
+    point_3d vertex_fa(-2, -0.5, 3);
+    point_3d vertex_fb(-2, 0.5, 3);
+    point_3d vertex_fc(-1, 0.5, 3);
+    point_3d vertex_fd(-1, -0.5, 3);
 
     // four "back" vertices of the cube
-    point_3d vertex_ba(-1, 1, 2);
-    point_3d vertex_bb(1, 1, 2);
-    point_3d vertex_bc(1, -1, 2);
-    point_3d vertex_bd(-1, -1, 2);
+    point_3d vertex_ba(-2, -0.5, 4);
+    point_3d vertex_bb(-2, 0.5, 4);
+    point_3d vertex_bc(-1, 0.5, 4);
+    point_3d vertex_bd(-1, -0.5, 4);
 
-    rgb_color black(0, 0, 0);
+    rgb_color red(255, 0, 0);
+    rgb_color green(0, 255, 0);
+    rgb_color blue(0, 0, 255);
 
     // TODO: implement wrapper function
     // "front" face
-    draw_line(renderer, project_vertex(vertex_fa), project_vertex(vertex_fb), black);
-    draw_line(renderer, project_vertex(vertex_fb), project_vertex(vertex_fc), black);
-    draw_line(renderer, project_vertex(vertex_fc), project_vertex(vertex_fd), black);
-    draw_line(renderer, project_vertex(vertex_fd), project_vertex(vertex_fa), black);
+    draw_line(renderer, project_vertex(vertex_fa), project_vertex(vertex_fb), blue);
+    draw_line(renderer, project_vertex(vertex_fb), project_vertex(vertex_fc), blue);
+    draw_line(renderer, project_vertex(vertex_fc), project_vertex(vertex_fd), blue);
+    draw_line(renderer, project_vertex(vertex_fd), project_vertex(vertex_fa), blue);
 
     // "back" face
-    draw_line(renderer, project_vertex(vertex_ba), project_vertex(vertex_bb), black);
-    draw_line(renderer, project_vertex(vertex_bb), project_vertex(vertex_bc), black);
-    draw_line(renderer, project_vertex(vertex_bc), project_vertex(vertex_bd), black);
-    draw_line(renderer, project_vertex(vertex_bd), project_vertex(vertex_ba), black);
+    draw_line(renderer, project_vertex(vertex_ba), project_vertex(vertex_bb), red);
+    draw_line(renderer, project_vertex(vertex_bb), project_vertex(vertex_bc), red);
+    draw_line(renderer, project_vertex(vertex_bc), project_vertex(vertex_bd), red);
+    draw_line(renderer, project_vertex(vertex_bd), project_vertex(vertex_ba), red);
+
+    // "front to back" edges
+    draw_line(renderer, project_vertex(vertex_fa), project_vertex(vertex_ba), green);
+    draw_line(renderer, project_vertex(vertex_fb), project_vertex(vertex_bb), green);
+    draw_line(renderer, project_vertex(vertex_fc), project_vertex(vertex_bc), green);
+    draw_line(renderer, project_vertex(vertex_fd), project_vertex(vertex_bd), green);
 
     SDL_RenderPresent(renderer);
     
