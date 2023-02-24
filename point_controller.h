@@ -32,4 +32,21 @@ class line_2d
         void set_line(point_2d source_0, point_2d source_1);  // set the entire line
 };
 
+class point_3d
+{
+    private:
+        int x;
+        int y;
+        int z;
+    public:
+        point_3d(int source_x, int source_y, int source_z);  // constructor
+        // accessor functions
+        int get_x();
+        int get_y();
+        int get_z();
+        void set_x(int source_x);
+        void set_y(int source_y);
+        void set_z(int source_z);
+};
+
 #endif  // POINT_CONTROLLER_H
