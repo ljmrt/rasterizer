@@ -39,6 +39,7 @@ class point_3d
         float y;
         float z;
     public:
+        point_3d();  // constructor
         point_3d(float source_x, float source_y, float source_z);  // constructor
         // accessor functions
         float get_x();

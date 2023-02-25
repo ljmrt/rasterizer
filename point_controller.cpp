@@ -28,6 +28,13 @@ void point_2d::set_y(int source_y)
 
 // TODO: implement line_2d functions
 
+point_3d::point_3d()
+{
+    x = 0;
+    y = 0;
+    z = 0;
+}
+
 point_3d::point_3d(float source_x, float source_y, float source_z)
 {
     x = source_x;
