@@ -4,14 +4,18 @@
 #include <SDL2/SDL.h>
 #include "point_controller.h"
 
-class object_model  // TODO: effectively implement vertices(if needed)
+class object_model
 {
     private:
-        point_3d triangles[128];  // note: keep in mind this limitation
+        point_3d vertices[128];
+        point_3d triangles[128];  // triangles are stored with indexes of vertices
     public:
         object_model();
-        object_model(point_3d source_triangles[]);
-        point_3d get_triangle(int index);
+        object_model(point_3d source_vertices[], point_3d source_triangles[]);
+        point_3d *get_vertices();
+        point_3d *get_triangles();
+        void set_vertices(point_3d source_vertices);
+        void set_triangles(point_3d source_triangles);
 };
 
 class object_instance
@@ -27,11 +31,14 @@ class object_instance
         void set_position(point_3d source_position);
 };
 
-// render a 3D triangle on the screen
+object_model cube();
+
+// render a 3D triangle using a index of projected vertices
 //
 // @param renderer SDL renderer to use when drawing
-// @param triangle_3d projection of 3-dimensional triangle
-void render_triangle(SDL_Renderer *renderer, point_3d projected_triangle);
+// @param target_triangle 3-dimensional triangle to render
+// @param projected index of projected vertices
+void render_triangle(SDL_Renderer *renderer, point_3d target_triangle, point_2d projected[]);
 
 // render a 3D object instance
 //
