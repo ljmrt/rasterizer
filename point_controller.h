@@ -7,6 +7,7 @@ class point_2d
         int x;
         int y;
     public:
+        point_2d();  // constructor
         point_2d(int source_x, int source_y);  // constructor
         // TODO point_2d(const point_2d& source_point);  // copy constructor
         // accessor functions

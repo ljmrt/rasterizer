@@ -5,6 +5,7 @@
 #include "color_helper.h"
 #include "projection_handler.h"
 #include "object_collection.h"
+#include <ostream>
 
 int main()
 {
@@ -12,8 +13,9 @@ int main()
     SDL_Renderer* renderer = NULL;
     initialize_window("rasterizer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 480, 480, window, renderer);
 
-    object_instance cube_1(cube, point_3d(0, 0, 0));
-    render_object(renderer, cube_1);
+    std::cout << typeid(cube).name() << std::endl;
+    // object_instance cube_1(cube, point_3d(0, 0, 0));
+    // render_object(renderer, cube_1);
     
     SDL_RenderPresent(renderer);
     
