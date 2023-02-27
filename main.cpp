@@ -13,9 +13,33 @@ int main()
     SDL_Renderer* renderer = NULL;
     initialize_window("rasterizer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 480, 480, window, renderer);
 
-    std::cout << typeid(cube).name() << std::endl;
-    // object_instance cube_1(cube, point_3d(0, 0, 0));
-    // render_object(renderer, cube_1);
+    object_model cube;
+    point_3d set_vertices[] = {point_3d(1, 1, 1),  // index of vertices
+                               point_3d(-1, 1, 1),
+                               point_3d(-1, -1, 1),
+                               point_3d(1, -1, 1),
+                               point_3d(1, 1, -1),
+                               point_3d(-1, 1, -1),
+                               point_3d(-1, -1, -1),
+                               point_3d(1, -1, -1)};
+    point_3d set_triangles[] = {point_3d(0, 1, 2),  // triangles represented by point_3d's with the indexes of the vertices
+                                point_3d(0, 2, 3),
+                                point_3d(4, 0, 3),
+                                point_3d(4, 3, 7),
+                                point_3d(5, 4, 7),
+                                point_3d(5, 7, 6),
+                                point_3d(1, 5, 6),
+                                point_3d(1, 6, 2),
+                                point_3d(4, 5, 1),
+                                point_3d(4, 1, 0),
+                                point_3d(2, 6, 7),
+                                point_3d(2, 7, 3)};
+    
+    cube.set_vertices(set_vertices);
+    cube.set_triangles(set_triangles);
+    
+    object_instance cube_1(cube, point_3d(0, 0, 0));
+    render_object(renderer, cube_1);
     
     SDL_RenderPresent(renderer);
     

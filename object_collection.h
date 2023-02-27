@@ -31,7 +31,7 @@ class object_instance
         void set_position(point_3d source_position);
 };
 
-object_model cube();
+// object_model cube();
 
 // render a 3D triangle using a index of projected vertices
 //

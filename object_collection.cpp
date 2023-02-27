@@ -47,9 +47,7 @@ void object_model::set_triangles(point_3d source_triangles[])
 }
 
 // predefined models
-int sizecube = sizeof(cube);
-// cube.set_vertices({{1, 1, 1}, {-1, 1, 1}, {-1, -1, 1}, {1, -1, 1}, {1, 1, -1}, {-1, 1, -1}, {-1, -1, -1}, {1, -1, -1}}});
-// cube.set_triangles({{0, 1, 2}, {0, 2, 3}, {4, 0, 3}, {4, 3, 7}, {5, 4, 7}, {5, 7, 6}, {1, 5, 6}, {1, 6, 2}, {4, 5, 1}, {4, 1, 0}, {2, 6, 7}, {2, 7, 3}});
+// copy over from main.cpp
 
 object_instance::object_instance(object_model source_model, point_3d source_position)
 {
@@ -95,9 +93,8 @@ void render_object(SDL_Renderer *renderer, object_instance target_instance)
     for (int i = 0; i < 128; i++) {  // TODO: implement proper array size
         projected[i] = project_vertex(instance_model.get_vertices()[i]);
     }
-    // render usng projected index
-    point_3d model_triangles[128] = instance_model.get_triangles();
+    // render using projected index
     for (int i = 0; i < 128; i++) {  // TODO: implement standalone triangle color
-        render_triangle(renderer, model_triangles[i], projected);
+        render_triangle(renderer, instance_model.get_triangles()[i], projected);
     }
 }
