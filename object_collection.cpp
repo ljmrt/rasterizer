@@ -6,15 +6,16 @@
 #include "line_renderer.h"
 #include "color_helper.h"
 #include "projection_handler.h"
+#include <iostream>
 
 object_model::object_model()
 {
     // default all values to 0
     point_3d default_values[128];
     for (int i = 0; i < 128; i++) {
-        default_values[i].set_x(0);
-        default_values[i].set_y(0);
-        default_values[i].set_z(0);
+        default_values[i].set_x(1337);
+        default_values[i].set_y(1337);
+        default_values[i].set_z(1337);
     }
     set_vertices(default_values);
     set_triangles(default_values);
@@ -91,10 +92,17 @@ void render_object(SDL_Renderer *renderer, object_instance target_instance)
     point_2d projected[128];
     object_model instance_model = target_instance.get_model();
     for (int i = 0; i < 128; i++) {  // TODO: implement proper array size
-        projected[i] = project_vertex(instance_model.get_vertices()[i]);
+        if (instance_model.get_vertices()[i].get_x() == 1337) {
+            //    return;
+        }
+        point_3d index_vertice = sum_3d(instance_model.get_vertices()[i], target_instance.get_position());
+        projected[i] = project_vertex(index_vertice);
     }
     // render using projected index
     for (int i = 0; i < 128; i++) {  // TODO: implement standalone triangle color
+        if (instance_model.get_triangles()[i].get_x() == 1337) {
+            //return;
+        }
         render_triangle(renderer, instance_model.get_triangles()[i], projected);
     }
 }

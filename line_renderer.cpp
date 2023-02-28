@@ -5,6 +5,7 @@
 #include "point_controller.h"
 #include "common.h"
 #include "color_helper.h"
+#include <iostream>
 
 void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_color color)  // TODO: refactor and implement bresenham's algorithm
 {

@@ -5,7 +5,7 @@
 #include "color_helper.h"
 #include "projection_handler.h"
 #include "object_collection.h"
-#include <ostream>
+#include <iostream>
 
 int main()
 {
@@ -37,8 +37,9 @@ int main()
     
     cube.set_vertices(set_vertices);
     cube.set_triangles(set_triangles);
+    point_3d confusion[128];  // if deleted program no longer functions? memory bug?
     
-    object_instance cube_1(cube, point_3d(0, 0, 0));
+    object_instance cube_1(cube, point_3d(0, 0, 5));
     render_object(renderer, cube_1);
     
     SDL_RenderPresent(renderer);

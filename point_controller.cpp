@@ -33,8 +33,6 @@ void point_2d::set_y(int source_y)
     y = source_y;
 }
 
-// TODO: implement line_2d functions
-
 point_3d::point_3d()
 {
     x = 0;
@@ -77,4 +75,11 @@ void point_3d::set_y(float source_y)
 void point_3d::set_z(float source_z)
 {
     z = source_z;
+}
+
+point_3d sum_3d(point_3d point_0, point_3d point_1)
+{
+    return point_3d(point_0.get_x() + point_1.get_x(),
+                    point_0.get_y() + point_1.get_y(),
+                    point_0.get_z() + point_1.get_z());
 }
