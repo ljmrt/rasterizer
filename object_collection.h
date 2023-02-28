@@ -3,19 +3,34 @@
 
 #include <SDL2/SDL.h>
 #include "point_controller.h"
+#include "color_helper.h"
+
+class triangle_3d
+{
+private:
+    point_3d points;
+    rgb_color color;
+public:
+    triangle_3d();
+    triangle_3d(point_3d source_points, rgb_color source_color);
+    point_3d get_points();
+    rgb_color get_color();
+    void set_points(point_3d source_points);
+    void set_color(rgb_color source_color);
+};
 
 class object_model
 {
     private:
         point_3d vertices[128];
-        point_3d triangles[128];  // triangles are stored with indexes of vertices
+        triangle_3d triangles[128];  // triangles are stored with indexes of vertices
     public:
         object_model();
-        object_model(point_3d source_vertices[], point_3d source_triangles[]);
+        object_model(point_3d source_vertices[], triangle_3d source_triangles[]);
         point_3d *get_vertices();
-        point_3d *get_triangles();
+        triangle_3d *get_triangles();
         void set_vertices(point_3d source_vertices[], int vertices_length);
-        void set_triangles(point_3d source_triangles[], int triangles_length);
+        void set_triangles(triangle_3d source_triangles[], int triangles_length);
 };
 
 class object_instance

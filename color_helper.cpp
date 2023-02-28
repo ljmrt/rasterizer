@@ -1,5 +1,13 @@
 #include "color_helper.h"
 
+rgb_color::rgb_color()
+{
+    // default all to 0
+    r = 0;
+    g = 0;
+    b = 0;
+}
+
 rgb_color::rgb_color(float source_r, float source_g, float source_b)
 {
     r = source_r;

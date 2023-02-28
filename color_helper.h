@@ -8,6 +8,7 @@ class rgb_color
         float g;  // green intensity of color
         float b;  // blue intensity of color
     public:
+        rgb_color();
         rgb_color(float source_r, float source_g, float source_b);
         // accessor functions
         float get_r();

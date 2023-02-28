@@ -22,18 +22,26 @@ int main()
                                point_3d(-1, 1, -1),
                                point_3d(-1, -1, -1),
                                point_3d(1, -1, -1)};
-    point_3d set_triangles[] = {point_3d(0, 1, 2),  // triangles represented by point_3d's with the indexes of the vertices
-                                point_3d(0, 2, 3),
-                                point_3d(4, 0, 3),
-                                point_3d(4, 3, 7),
-                                point_3d(5, 4, 7),
-                                point_3d(5, 7, 6),
-                                point_3d(1, 5, 6),
-                                point_3d(1, 6, 2),
-                                point_3d(4, 5, 1),
-                                point_3d(4, 1, 0),
-                                point_3d(2, 6, 7),
-                                point_3d(2, 7, 3)};
+
+    // predefined common colors, TODO: move to color_helper.h
+    rgb_color red(255, 0, 0);
+    rgb_color green(0, 255, 0);
+    rgb_color blue(0, 0, 255);
+    rgb_color yellow(255, 255, 0);
+    rgb_color purple(255, 0, 255);
+    rgb_color cyan(0, 255, 255);
+    triangle_3d set_triangles[] = {triangle_3d(point_3d(0, 1, 2), rgb_color(red)),  // triangles represented by point_3d's with the indexes of the vertices
+                                triangle_3d(point_3d(0, 2, 3), rgb_color(red)),
+                                triangle_3d(point_3d(4, 0, 3), rgb_color(green)),
+                                triangle_3d(point_3d(4, 3, 7), rgb_color(green)),
+                                triangle_3d(point_3d(5, 4, 7), rgb_color(blue)),
+                                triangle_3d(point_3d(5, 7, 6), rgb_color(blue)),
+                                triangle_3d(point_3d(1, 5, 6), rgb_color(yellow)),
+                                triangle_3d(point_3d(1, 6, 2), rgb_color(yellow)),
+                                triangle_3d(point_3d(4, 5, 1), rgb_color(purple)),
+                                triangle_3d(point_3d(4, 1, 0), rgb_color(purple)),
+                                triangle_3d(point_3d(2, 6, 7), rgb_color(cyan)),
+                                triangle_3d(point_3d(2, 7, 3), rgb_color(cyan))};
 
     cube.set_vertices(set_vertices, 8);
     cube.set_triangles(set_triangles, 12);
