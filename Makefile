@@ -1,7 +1,7 @@
 TARGET = prog.out
-LIBS = -lSDL2main -lSDL2
-CC = g++
-CFLAGS = -g -fPIC -Wall -Werror -Wextra -Wno-unused-result -Wno-unused-parameter -Wno-unused-variable -O2
+LDLIBS = -lSDL2main -lSDL2
+CXX = g++
+CXXFLAGS = -g -fPIC -Wall -Werror -Wextra -Wno-unused-result -Wno-unused-parameter -Wno-unused-variable -O2
 
 .PHONY: default all clean
 
@@ -12,12 +12,12 @@ OBJECTS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
 HEADERS = $(wildcard *.h)
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .PRECIOUS: $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) $(CFLAGS)  $(LIBS) -o $@
+	$(CXX) $(OBJECTS) $(CXXFLAGS)  $(LDLIBS) -o $@
 
 clean:
 	-rm -f *.o
