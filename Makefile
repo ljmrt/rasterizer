@@ -22,4 +22,5 @@ $(TARGET): $(OBJECTS)
 clean:
 	-rm -f *.o
 	-rm -f \#*\#
+	-rm -f *~
 	-rm -f $(TARGET)
