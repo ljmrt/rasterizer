@@ -34,12 +34,11 @@ int main()
                                 point_3d(4, 1, 0),
                                 point_3d(2, 6, 7),
                                 point_3d(2, 7, 3)};
+
+    cube.set_vertices(set_vertices, 8);
+    cube.set_triangles(set_triangles, 12);
     
-    cube.set_vertices(set_vertices);
-    cube.set_triangles(set_triangles);
-    point_3d confusion[128];  // if deleted program no longer functions? memory bug?
-    
-    object_instance cube_1(cube, point_3d(0, 0, 5));
+    object_instance cube_1(cube, point_3d(0, 0, 2));
     render_object(renderer, cube_1);
     
     SDL_RenderPresent(renderer);

@@ -17,8 +17,8 @@ object_model::object_model()
         default_values[i].set_y(1337);
         default_values[i].set_z(1337);
     }
-    set_vertices(default_values);
-    set_triangles(default_values);
+    set_vertices(default_values, 128);
+    set_triangles(default_values, 128);
 }
 
 object_model::object_model(point_3d source_vertices[], point_3d source_triangles[])
@@ -37,14 +37,14 @@ point_3d *object_model::get_triangles()
     return triangles;
 }
 
-void object_model::set_vertices(point_3d source_vertices[])
+void object_model::set_vertices(point_3d source_vertices[], int vertices_length)
 {
-    std::copy(source_vertices, source_vertices+128, vertices);
+    std::copy(source_vertices, source_vertices + vertices_length, vertices);
 }
 
-void object_model::set_triangles(point_3d source_triangles[])
+void object_model::set_triangles(point_3d source_triangles[], int triangles_length)
 {
-    std::copy(source_triangles, source_triangles+128, triangles);
+    std::copy(source_triangles, source_triangles + triangles_length, triangles);
 }
 
 // predefined models
@@ -93,7 +93,7 @@ void render_object(SDL_Renderer *renderer, object_instance target_instance)
     object_model instance_model = target_instance.get_model();
     for (int i = 0; i < 128; i++) {  // TODO: implement proper array size
         if (instance_model.get_vertices()[i].get_x() == 1337) {
-            //    return;
+            break;
         }
         point_3d index_vertice = sum_3d(instance_model.get_vertices()[i], target_instance.get_position());
         projected[i] = project_vertex(index_vertice);
@@ -101,7 +101,7 @@ void render_object(SDL_Renderer *renderer, object_instance target_instance)
     // render using projected index
     for (int i = 0; i < 128; i++) {  // TODO: implement standalone triangle color
         if (instance_model.get_triangles()[i].get_x() == 1337) {
-            //return;
+            break;
         }
         render_triangle(renderer, instance_model.get_triangles()[i], projected);
     }

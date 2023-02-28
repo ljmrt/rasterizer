@@ -25,7 +25,7 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_c
 
         std::vector<float> ys = interpolate(x0, y0, x1, y1);
         for (auto x = x0; x < x1; x++) {
-            int ys_value = x - x0 < ys.size() ? ys.at(x - x0) : 0;
+            int ys_value = std::size_t(x - x0) < ys.size() ? ys.at(x - x0) : 0;
             canvas_draw_pixel(renderer, x, ys_value);
         }
     } else {  // line is more vertical
@@ -36,7 +36,7 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_c
 
         std::vector<float> xs = interpolate(y0, x0, y1, x1);
         for (auto y = y0; y < y1; y++) {
-            int xs_value = y - y0 < xs.size() ? xs.at(y - y0) : 0;
+            int xs_value = std::size_t(y - y0) < xs.size() ? xs.at(y - y0) : 0;
             canvas_draw_pixel(renderer, xs_value, y);
         }
     }

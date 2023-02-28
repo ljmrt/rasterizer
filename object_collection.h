@@ -14,8 +14,8 @@ class object_model
         object_model(point_3d source_vertices[], point_3d source_triangles[]);
         point_3d *get_vertices();
         point_3d *get_triangles();
-        void set_vertices(point_3d source_vertices[]);
-        void set_triangles(point_3d source_triangles[]);
+        void set_vertices(point_3d source_vertices[], int vertices_length);
+        void set_triangles(point_3d source_triangles[], int triangles_length);
 };
 
 class object_instance
