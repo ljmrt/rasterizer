@@ -21,6 +21,7 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_c
         // ensure x0 < x1
         if (x0 > x1) {
             std::swap(x0, x1);
+            std::swap(y0, y1);
         }
 
         std::vector<float> ys = interpolate(x0, y0, x1, y1);
@@ -32,6 +33,7 @@ void draw_line(SDL_Renderer* renderer, point_2d point_0, point_2d point_1, rgb_c
         // ensure y0 < y1
         if (y0 > y1) {
             std::swap(y0, y1);
+            std::swap(x0, x1);
         }
 
         std::vector<float> xs = interpolate(y0, x0, y1, x1);
