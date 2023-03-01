@@ -51,7 +51,7 @@ object_model::object_model()
         default_vertices[i].set_y(1337);
         default_vertices[i].set_z(1337);
 
-        default_triangles[i].set_points(default_vertices[i]);
+        default_triangles[i].set_points(point_3d(1337, 1337, 1337));
         default_triangles[i].set_color(rgb_color(0, 0, 0));
     }
     set_vertices(default_vertices, 128);
@@ -137,9 +137,11 @@ void render_object(SDL_Renderer *renderer, object_instance target_instance)
     }
     // render using projected index
     for (int i = 0; i < 128; i++) {  // TODO: implement standalone triangle color
-        if (instance_model.get_triangles()[i].get_points().get_x() == 1337) {
+        int triangle_validated = instance_model.get_triangles()[i].get_points().get_x();
+        if (triangle_validated >= 1337 || triangle_validated < 0) {  // if default value or unachievable index
             break;
         }
+        
         render_triangle(renderer, instance_model.get_triangles()[i], projected);
     }
 }
