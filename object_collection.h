@@ -33,17 +33,23 @@ class object_model
         void set_triangles(triangle_3d source_triangles[], int triangles_length);
 };
 
+struct transform {
+    float scale;
+    float rotation;  // rotation around the Y axis
+    point_3d position;
+}
+
 class object_instance
 {
     private:
         object_model model;
-        point_3d position;
+        struct transform transformation;
     public:
         object_instance(object_model source_model, point_3d source_position);
         object_model get_model();
-        point_3d get_position();
+        struct transform get_transformation();
         void set_model(object_model source_model);
-        void set_position(point_3d source_position);
+        void set_transformation(struct transform source_transformation);
 };
 
 // object_model cube();
@@ -55,13 +61,18 @@ class object_instance
 // @param projected index of projected vertices
 void render_triangle(SDL_Renderer *renderer, point_3d target_triangle, point_2d projected[]);
 
-// render a 3D object instance
+// render a 3D model
+//
+// @param renderer SDL renderer to use when drawing
+// @param target_model model to render
+// @param target_transformation transformation of the model
+void render_object(SDL_Renderer *renderer, object_instance target_instance, struct transform transformation);
+
+// render a 3D scene
+// note: scene linked list not yet implemented: renders object_instances
 //
 // @param renderer SDL renderer to use when drawing
 // @param target_instance instance to render
-void render_object(SDL_Renderer *renderer, object_instance target_instance);
-
-// TODO
-// void render_scene();
+void render_scene(SDL_Renderer *renderer, object_instance target_instance);
 
 #endif  // OBJECT_COLLECTION_H

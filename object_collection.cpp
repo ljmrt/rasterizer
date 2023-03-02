@@ -98,9 +98,9 @@ object_model object_instance::get_model()
     return model;
 }
 
-point_3d object_instance::get_position()
+struct transform object_instance::get_transformation()
 {
-    return position;
+    return transformation;
 }
 
 void object_instance::set_model(object_model source_model)
@@ -108,9 +108,9 @@ void object_instance::set_model(object_model source_model)
     model = source_model;
 }
 
-void object_instance::set_position(point_3d source_position)
+void object_instance::set_transformation(struct transform source_transformation)
 {
-    position = source_position;
+    tranformation = source_transformation;
 }
 
 void render_triangle(SDL_Renderer *renderer, triangle_3d target_triangle, point_2d projected[])
@@ -123,25 +123,32 @@ void render_triangle(SDL_Renderer *renderer, triangle_3d target_triangle, point_
                             target_triangle.get_color());
 }
 
-void render_object(SDL_Renderer *renderer, object_instance target_instance)
+void render_model(SDL_Renderer *renderer, object_model target_model, struct transform target_transformation)
 {
     // create projected index
     point_2d projected[128];
-    object_model instance_model = target_instance.get_model();
     for (int i = 0; i < 128; i++) {  // TODO: implement proper array size
-        if (instance_model.get_vertices()[i].get_x() == 1337) {
+        if (target_model.get_vertices()[i].get_x() == 1337) {
             break;
         }
-        point_3d index_vertice = sum_3d(instance_model.get_vertices()[i], target_instance.get_position());
+        point_3d index_vertice = sum_3d(target_model.get_vertices()[i], target_transformation.position);
         projected[i] = project_vertex(index_vertice);
     }
     // render using projected index
     for (int i = 0; i < 128; i++) {  // TODO: implement standalone triangle color
-        int triangle_validated = instance_model.get_triangles()[i].get_points().get_x();
+        int triangle_validated = target_model.get_triangles()[i].get_points().get_x();
         if (triangle_validated >= 1337 || triangle_validated < 0) {  // if default value or unachievable index
             break;
         }
         
-        render_triangle(renderer, instance_model.get_triangles()[i], projected);
+        render_triangle(renderer, target_model.get_triangles()[i], projected);
     }
+}
+
+void render_scene(SDL_Renderer *renderer, object_instance target_instance)  // TODO: scene linked list or vector
+{
+    struct transform camera_matrix =;
+    struct transform instance_transformation =;
+
+    render_model(renderer, target_instance.get_model(), instance_transformation);
 }

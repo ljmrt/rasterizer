@@ -46,7 +46,7 @@ int main()
     cube.set_vertices(set_vertices, 8);
     cube.set_triangles(set_triangles, 12);
     
-    object_instance cube_1(cube, point_3d(0, 0, 2));
+    object_instance cube_1(cube, point_3d(-1, 0, 3));
     render_object(renderer, cube_1);
     
     SDL_RenderPresent(renderer);
