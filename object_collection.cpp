@@ -41,27 +41,10 @@ void triangle_3d::set_color(rgb_color source_color)
     color = source_color;
 }
 
-object_model::object_model()
-{
-    // default all position values to 1337
-    point_3d default_vertices[128];
-    triangle_3d default_triangles[128];
-    for (int i = 0; i < 128; i++) {
-        default_vertices[i].set_x(1337);
-        default_vertices[i].set_y(1337);
-        default_vertices[i].set_z(1337);
-
-        default_triangles[i].set_points(point_3d(1337, 1337, 1337));
-        default_triangles[i].set_color(rgb_color(0, 0, 0));
-    }
-    set_vertices(default_vertices, 128);
-    set_triangles(default_triangles, 128);
-}
-
 object_model::object_model(point_3d source_vertices[], triangle_3d source_triangles[])
 {
-    std::copy(source_vertices, source_vertices+128, vertices);
-    std::copy(source_triangles, source_triangles+128, triangles);
+    std::copy(source_vertices, source_vertices + this.get_vertices_size(), vertices);
+    std::copy(source_triangles, source_triangles + this.get_triangles_size(), triangles);
 }
 
 point_3d *object_model::get_vertices()
@@ -69,19 +52,29 @@ point_3d *object_model::get_vertices()
     return vertices;
 }
 
+int object_model::get_vertices_size()
+{
+    return Tvertices_size;
+}
+
 triangle_3d *object_model::get_triangles()
 {
     return triangles;
 }
 
-void object_model::set_vertices(point_3d source_vertices[], int vertices_length)
+int object_model::get_triangles_size()
 {
-    std::copy(source_vertices, source_vertices + vertices_length, vertices);
+    return Ttriangles_size;
 }
 
-void object_model::set_triangles(triangle_3d source_triangles[], int triangles_length)
+void object_model::set_vertices(point_3d source_vertices[])
 {
-    std::copy(source_triangles, source_triangles + triangles_length, triangles);
+    std::copy(source_vertices, source_vertices + this.get_vertices_size(), vertices);
+}
+
+void object_model::set_triangles(triangle_3d source_triangles[])
+{
+    std::copy(source_triangles, source_triangles + this.get_triangles_size(), triangles);
 }
 
 // predefined models
@@ -125,22 +118,16 @@ void render_triangle(SDL_Renderer *renderer, triangle_3d target_triangle, point_
 
 void render_model(SDL_Renderer *renderer, object_model target_model, struct transform target_transformation)
 {
+    int target_vertices_size = target_model.get_vertices_size();
+    int target_triangles_size = target_model.get_triangles_size();
     // create projected index
-    point_2d projected[128];
-    for (int i = 0; i < 128; i++) {  // TODO: implement proper array size
-        if (target_model.get_vertices()[i].get_x() == 1337) {
-            break;
-        }
+    point_2d projected[target_vertices_size];
+    for (int i = 0; i < target_vertices_size; i++) {
         point_3d index_vertice = sum_3d(target_model.get_vertices()[i], target_transformation.position);
         projected[i] = project_vertex(index_vertice);
     }
     // render using projected index
-    for (int i = 0; i < 128; i++) {  // TODO: implement standalone triangle color
-        int triangle_validated = target_model.get_triangles()[i].get_points().get_x();
-        if (triangle_validated >= 1337 || triangle_validated < 0) {  // if default value or unachievable index
-            break;
-        }
-        
+    for (int i = 0; i < target_triangles_size; i++) {        
         render_triangle(renderer, target_model.get_triangles()[i], projected);
     }
 }

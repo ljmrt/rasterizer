@@ -19,18 +19,21 @@ public:
     void set_color(rgb_color source_color);
 };
 
+template<int Tvertices_size, int Ttriangles_size>
 class object_model
 {
     private:
-        point_3d vertices[128];
-        triangle_3d triangles[128];  // triangles are stored with indexes of vertices
+        point_3d vertices[vertices_size];
+        triangle_3d triangles[vertices_size];  // triangles are stored with indexes of vertices
     public:
         object_model();
         object_model(point_3d source_vertices[], triangle_3d source_triangles[]);
         point_3d *get_vertices();
+        int get_vertices_size();
         triangle_3d *get_triangles();
-        void set_vertices(point_3d source_vertices[], int vertices_length);
-        void set_triangles(triangle_3d source_triangles[], int triangles_length);
+        int get_triangles_size();
+        void set_vertices(point_3d source_vertices[]);
+        void set_triangles(triangle_3d source_triangles[]);
 };
 
 struct transform {
