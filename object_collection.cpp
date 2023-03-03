@@ -136,8 +136,10 @@ void render_model(SDL_Renderer *renderer, object_model target_model, float *targ
 void render_scene(SDL_Renderer *renderer, object_instance target_instance)  // TODO: scene linked list or vector
 {
     struct transform target_transformation = target_instance.get_transformation();
-    
-    float camera_matrix[4][4];
+
+    float camera_orientation[4][4] = generate_rotation_matrix(0.0);
+    point_3d camera_position(0, 0, 0);
+    float camera_matrix[4][4] = generate_camera_matrix(camera_orientation, camera_position);
     
     float rotation_matrix[4][4] = generate_rotation_matrix(target_transformation.rotation);
     float scaling_matrix[4][4] = generate_scaling_matrix(target_transformation.scale);

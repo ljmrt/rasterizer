@@ -15,6 +15,19 @@ float *multiply_matrix(float *matrix, float *vector)
     return product_matrix;
 }
 
+float *transpose_matrix(float *matrix)
+{
+    float transposed_matrix[4][4];
+
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            transposed_matrix[i][j] = matrix[j][i];
+        }
+    }
+
+    return transposed_matrix;
+}
+
 float *multiply_matrices(float *matrix_0, float *matrix_1)
 {
     float product_matrix[4][4];
@@ -62,4 +75,12 @@ float *generate_translation_matrix(point_3d translation)
         {0,     0,     1,     translation.get_z()},
         {0,     0,     0,     1},
     };
+}
+
+float *generate_camera_matrix(float *orientation, point_3d position)
+{
+    float orientation_matrix[4][4] = transpose_matrix(orientation);
+    float position_matrix[4][4] = generate_translation_matrix(multiply_3d(position, -1));
+    
+    return multiply_matrices(orientation_matrix, position_matrix);
 }
