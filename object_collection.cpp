@@ -41,49 +41,45 @@ void triangle_3d::set_color(rgb_color source_color)
     color = source_color;
 }
 
-object_model::object_model(point_3d source_vertices[], triangle_3d source_triangles[])
+object_model::object_model()
 {
-    std::copy(source_vertices, source_vertices + this.get_vertices_size(), vertices);
-    std::copy(source_triangles, source_triangles + this.get_triangles_size(), triangles);
+    vertices.push_back(point_3d(0, 0, 0));
+    triangles.push_back(triangle_3d(point_3d(0, 0, 0), rgb_color(0, 0, 0)));
 }
 
-point_3d *object_model::get_vertices()
+object_model::object_model(std::vector<point_3d> source_vertices, std::vector<triangle_3d> source_triangles)
+{
+    vertices = source_vertices;
+    triangles = source_triangles;
+}
+
+std::vector<point_3d> object_model::get_vertices()
 {
     return vertices;
 }
 
-int object_model::get_vertices_size()
-{
-    return Tvertices_size;
-}
-
-triangle_3d *object_model::get_triangles()
+std::vector<triangle_3d> object_model::get_triangles()
 {
     return triangles;
 }
 
-int object_model::get_triangles_size()
+void object_model::set_vertices(std::vector<point_3d> source_vertices)
 {
-    return Ttriangles_size;
+    vertices = source_vertices;
 }
 
-void object_model::set_vertices(point_3d source_vertices[])
+void object_model::set_triangles(std::vector<triangle_3d> source_triangles)
 {
-    std::copy(source_vertices, source_vertices + this.get_vertices_size(), vertices);
-}
-
-void object_model::set_triangles(triangle_3d source_triangles[])
-{
-    std::copy(source_triangles, source_triangles + this.get_triangles_size(), triangles);
+    triangles = source_triangles;
 }
 
 // predefined models
 // copy over from main.cpp
 
-object_instance::object_instance(object_model source_model, point_3d source_position)
+object_instance::object_instance(object_model source_model, struct transform source_transformation)
 {
     model = source_model;
-    position = source_position;
+    transformation = source_transformation;
 }
 
 object_model object_instance::get_model()
@@ -103,7 +99,7 @@ void object_instance::set_model(object_model source_model)
 
 void object_instance::set_transformation(struct transform source_transformation)
 {
-    tranformation = source_transformation;
+    transformation = source_transformation;
 }
 
 void render_triangle(SDL_Renderer *renderer, triangle_3d target_triangle, point_2d projected[])
@@ -118,8 +114,8 @@ void render_triangle(SDL_Renderer *renderer, triangle_3d target_triangle, point_
 
 void render_model(SDL_Renderer *renderer, object_model target_model, struct transform target_transformation)
 {
-    int target_vertices_size = target_model.get_vertices_size();
-    int target_triangles_size = target_model.get_triangles_size();
+    int target_vertices_size = target_model.get_vertices().size();
+    int target_triangles_size = target_model.get_triangles().size();
     // create projected index
     point_2d projected[target_vertices_size];
     for (int i = 0; i < target_vertices_size; i++) {
@@ -134,8 +130,5 @@ void render_model(SDL_Renderer *renderer, object_model target_model, struct tran
 
 void render_scene(SDL_Renderer *renderer, object_instance target_instance)  // TODO: scene linked list or vector
 {
-    struct transform camera_matrix =;
-    struct transform instance_transformation =;
-
-    render_model(renderer, target_instance.get_model(), instance_transformation);
+    render_model(renderer, target_instance.get_model(), target_instance.get_transformation());
 }

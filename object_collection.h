@@ -19,28 +19,25 @@ public:
     void set_color(rgb_color source_color);
 };
 
-template<int Tvertices_size, int Ttriangles_size>
 class object_model
 {
     private:
-        point_3d vertices[vertices_size];
-        triangle_3d triangles[vertices_size];  // triangles are stored with indexes of vertices
+        std::vector<point_3d> vertices;
+        std::vector<triangle_3d> triangles;  // triangles are stored with indexes of vertices
     public:
         object_model();
-        object_model(point_3d source_vertices[], triangle_3d source_triangles[]);
-        point_3d *get_vertices();
-        int get_vertices_size();
-        triangle_3d *get_triangles();
-        int get_triangles_size();
-        void set_vertices(point_3d source_vertices[]);
-        void set_triangles(triangle_3d source_triangles[]);
+        object_model(std::vector<point_3d> source_vertices, std::vector<triangle_3d> source_triangles);
+        std::vector<point_3d> get_vertices();
+        std::vector<triangle_3d> get_triangles();
+        void set_vertices(std::vector<point_3d> source_vertices);
+        void set_triangles(std::vector<triangle_3d> source_triangles);
 };
 
 struct transform {
     float scale;
     float rotation;  // rotation around the Y axis
     point_3d position;
-}
+};
 
 class object_instance
 {
@@ -48,7 +45,7 @@ class object_instance
         object_model model;
         struct transform transformation;
     public:
-        object_instance(object_model source_model, point_3d source_position);
+        object_instance(object_model source_model, struct transform source_transformation);
         object_model get_model();
         struct transform get_transformation();
         void set_model(object_model source_model);
@@ -69,7 +66,7 @@ void render_triangle(SDL_Renderer *renderer, point_3d target_triangle, point_2d 
 // @param renderer SDL renderer to use when drawing
 // @param target_model model to render
 // @param target_transformation transformation of the model
-void render_object(SDL_Renderer *renderer, object_instance target_instance, struct transform transformation);
+void render_model(SDL_Renderer *renderer, object_model target_model, struct transform transformation);
 
 // render a 3D scene
 // note: scene linked list not yet implemented: renders object_instances
