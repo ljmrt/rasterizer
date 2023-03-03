@@ -7,6 +7,7 @@
 #include "color_helper.h"
 #include "projection_handler.h"
 #include <iostream>
+#include "matrix_handler.h"
 
 triangle_3d::triangle_3d()
 {
@@ -112,15 +113,19 @@ void render_triangle(SDL_Renderer *renderer, triangle_3d target_triangle, point_
                             target_triangle.get_color());
 }
 
-void render_model(SDL_Renderer *renderer, object_model target_model, struct transform target_transformation)
+void render_model(SDL_Renderer *renderer, object_model target_model, float *target_transformation)
 {
     int target_vertices_size = target_model.get_vertices().size();
     int target_triangles_size = target_model.get_triangles().size();
     // create projected index
     point_2d projected[target_vertices_size];
     for (int i = 0; i < target_vertices_size; i++) {
-        point_3d index_vertice = sum_3d(target_model.get_vertices()[i], target_transformation.position);
-        projected[i] = project_vertex(index_vertice);
+        point_3d vertex = target_vertices[i];
+        float vertex_4d[4] = {vertex.get_x(), vertex.get_y(), vertex.get_z(), 1};
+        vertex_4d = multiply_matrix(target_transformation, vertex_4d);
+        point_3d transformed_vertex(vertex_4d[0], vertex_4d[1], vertex_4d[2]);
+        
+        projected[i] = project_vertex(transformed_vertex);
     }
     // render using projected index
     for (int i = 0; i < target_triangles_size; i++) {        
@@ -130,5 +135,17 @@ void render_model(SDL_Renderer *renderer, object_model target_model, struct tran
 
 void render_scene(SDL_Renderer *renderer, object_instance target_instance)  // TODO: scene linked list or vector
 {
-    render_model(renderer, target_instance.get_model(), target_instance.get_transformation());
+    struct transform target_transformation = target_instance.get_transformation();
+    
+    float camera_matrix[4][4];
+    
+    float rotation_matrix[4][4] = generate_rotation_matrix(target_transformation.rotation);
+    float scaling_matrix[4][4] = generate_scaling_matrix(target_transformation.scale);
+    float translation_matrix[4][4] = generate_translation_matrix(target_transformation.translation);
+    float transformation_matrix[4][4] = multiply_matrices(multiply_matrices(rotation_matrix, scaling_matrix),
+                                                          translation_matrix);
+
+    float camera_transformation_matrix[4][4] = multiply_matrices(camera_matrix, transformation_matrix);
+    
+    render_model(renderer, target_instance.get_model(), camera_transformation_matrix);
 }

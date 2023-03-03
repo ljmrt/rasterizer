@@ -65,8 +65,8 @@ void render_triangle(SDL_Renderer *renderer, point_3d target_triangle, point_2d 
 //
 // @param renderer SDL renderer to use when drawing
 // @param target_model model to render
-// @param target_transformation transformation of the model
-void render_model(SDL_Renderer *renderer, object_model target_model, struct transform transformation);
+// @param target_transformation transformation of the model's instance
+void render_model(SDL_Renderer *renderer, object_model target_model, float* target_transformation);
 
 // render a 3D scene
 // note: scene linked list not yet implemented: renders object_instances
