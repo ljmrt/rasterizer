@@ -11,20 +11,20 @@
 // @param matrix matrix to multiply by
 // @param vector vector to multiply by
 // @return product matrix of matrix and vector
-float *multiply_matrix(float *matrix, float *vector);
+float *multiply_matrix(float matrix[4][4], float vector[4]);
 
 // transpose a matrix("swap" columns and rows)
 //
 // @param matrix matrix to transpose
 // @return transposed matrix
-float *transpose_matrix(float *matrix);
+float *transpose_matrix(float matrix[4][4]);
 
 // get the product of two matrices
 //
 // @param matrix_0 first matrix to multiply by
 // @param matrix_0 second matrix to multiply by
 // @return product matrix of matrix and matrix
-float *multiply_matrices(float *matrix_0, float *matrix_1);
+float *multiply_matrices(float matrix_0[4][4], float matrix_1[4][4]);
 
 // generate a 4x4 uniform rotation matrix using the given degrees
 //
@@ -43,12 +43,5 @@ float *generate_scaling_matrix(float scale);
 // @param translation amount to translate by
 // @return 4x4 matrix utilized in translations
 float *generate_translation_matrix(point_3d translation);
-
-// generate 4x4 camera matrix to apply translations and rotations scene-wide
-//
-// @param orientation rotation matrix of the orientation of the camera
-// @param position position of the camera in space
-// @return 4x4 matrix utilized in scene-wide operations
-float *generate_camera_matrix(float *orientation, point_3d position);
 
 #endif  // MATRIX_HANDLER_H

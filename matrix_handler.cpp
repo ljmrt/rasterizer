@@ -1,8 +1,9 @@
 #include <math.h>
+#include <cstring>
 #include "matrix_handler.h"
 #include "point_controller.h"
 
-float *multiply_matrix(float *matrix, float *vector)
+float *multiply_matrix(float matrix[4][4], float vector[4])
 {
     float product_matrix[4];
 
@@ -12,10 +13,13 @@ float *multiply_matrix(float *matrix, float *vector)
         }
     }
 
-    return product_matrix;
+    // preserve array after function going out of scope
+    float *return_matrix = new float[4];
+    std::memcpy(return_matrix, product_matrix, sizeof(product_matrix));
+    return return_matrix;
 }
 
-float *transpose_matrix(float *matrix)
+float *transpose_matrix(float matrix[4][4])
 {
     float transposed_matrix[4][4];
 
@@ -25,10 +29,12 @@ float *transpose_matrix(float *matrix)
         }
     }
 
-    return transposed_matrix;
+    float *return_matrix = new float[16];
+    std::memcpy(return_matrix, transposed_matrix, sizeof(transposed_matrix));
+    return return_matrix;
 }
 
-float *multiply_matrices(float *matrix_0, float *matrix_1)
+float *multiply_matrices(float matrix_0[4][4], float matrix_1[4][4])
 {
     float product_matrix[4][4];
 
@@ -42,45 +48,51 @@ float *multiply_matrices(float *matrix_0, float *matrix_1)
         }
     }
 
-    return product_matrix;
+    float *return_matrix = new float[16];
+    std::memcpy(return_matrix, product_matrix, sizeof(product_matrix));
+    return return_matrix;
 };
 
 float *generate_rotation_matrix(float degrees)
 {
-    float cos = cos(degrees * PI / 180);
-    float sin = sin(degrees * PI / 180);
-    return float[4][4] {
-        {cos,   0,     -sin,  0},
+    float cosine = cos(degrees * M_PI / 180);
+    float sine = sin(degrees * M_PI / 180);
+    float rotation_matrix[4][4] = {
+        {cosine,0,     -sine, 0},
         {0,     1,     0,     0},
-        {sin,   0,     cos,   0},
+        {sine,  0,     cosine,0},
         {0,     0,     0,     1},
     };
+
+    float *return_matrix = new float[16];
+    std::memcpy(return_matrix, rotation_matrix, sizeof(rotation_matrix));
+    return return_matrix;
 }
 
 float *generate_scaling_matrix(float scale)
 {
-    return float[4][4] {
+    float scaling_matrix[4][4] = {
         {scale, 0,     0,     0},
         {0,     scale, 0,     0},
         {0,     0,     scale, 0},
         {0,     0,     0,     1},
     };
+
+    float *return_matrix = new float[16];
+    std::memcpy(return_matrix, scaling_matrix, sizeof(scaling_matrix));
+    return return_matrix;
 }
 
 float *generate_translation_matrix(point_3d translation)
 {
-    return float[4][4] {
+    float translation_matrix[4][4] = {
         {1,     0,     0,     translation.get_x()},
         {0,     1,     0,     translation.get_y()},
         {0,     0,     1,     translation.get_z()},
         {0,     0,     0,     1},
     };
-}
 
-float *generate_camera_matrix(float *orientation, point_3d position)
-{
-    float orientation_matrix[4][4] = transpose_matrix(orientation);
-    float position_matrix[4][4] = generate_translation_matrix(multiply_3d(position, -1));
-    
-    return multiply_matrices(orientation_matrix, position_matrix);
+    float *return_matrix = new float[16];
+    std::memcpy(return_matrix, translation_matrix, sizeof(translation_matrix));
+    return return_matrix;
 }

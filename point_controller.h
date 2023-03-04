@@ -45,8 +45,8 @@ point_3d sum_3d(point_3d point_0, point_3d point_1);
 // get the product of two point_3d's
 //
 // @param point_0 point to multiply
-// @param point_1 point to multiply
+// @param constant constant to multiply by
 // @return product of points
-point_3d multiply_3d(point_3d point_0, point_3d point_1);
+point_3d multiply_3d(point_3d point_0, float constant);
 
 #endif  // POINT_CONTROLLER_H
