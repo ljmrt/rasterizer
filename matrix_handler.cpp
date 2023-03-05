@@ -5,7 +5,7 @@
 
 float *multiply_matrix(float matrix[4][4], float vector[4])
 {
-    float product_matrix[4];
+    float product_matrix[4] = {0};
 
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
