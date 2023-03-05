@@ -45,7 +45,9 @@ int main()
     std::vector<triangle_3d> set_triangles(triangles_array, triangles_array + (sizeof(triangles_array) / sizeof(triangles_array[0])));
     object_model cube(set_vertices, set_triangles);
     
-    object_instance cube_1(cube, (struct transform){1, 0, point_3d(-1, 0, 3)});
+    object_instance cube_0(cube, (struct transform){1, 80, point_3d(-3, -1, 4)});
+    object_instance cube_1(cube, (struct transform){1, 45, point_3d(0, 0, 0)});  // rotation broken? scale broken?
+    render_scene(renderer, cube_0);
     render_scene(renderer, cube_1);
     
     SDL_RenderPresent(renderer);
